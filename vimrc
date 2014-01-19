@@ -1,10 +1,17 @@
 colorscheme desert 
 set nu 
-syntax enable
-syntax on
+set showcmd "在状态栏显示正在输入的命令
+syntax enable "语法高亮
+set expandtab  "将tal键改为空格，默认8个
+set tabstop=4 "将Tab键改为4个空格
+set smarttab  "智能删除tab
+set cindent "使用c语言的规则自动缩进，当敲回车时候自动缩进
+set shiftwidth=4 "自动缩进时，使用4个空格，默认是8个
+set sm "括号配对情况
+syntax on   
 set cursorline 
-
-set nocompatible    " be iMproved
+"开始使用vundle的必须配置
+set nocompatible    " 是vim不兼容vi
 filetype off        " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -17,7 +24,7 @@ Bundle 'ctags.vim'
 Bundle 'taglist.vim'
 Bundle 'winmanager'
 Bundle 'cscope.vim'
-filetype plugin indent on
+filetype plugin indent on "vundle配置必须开启插件
 
 let g:winManagerWindowLayout='FileExplorer|TagList'
 nmap wm :WMToggle<CR>
