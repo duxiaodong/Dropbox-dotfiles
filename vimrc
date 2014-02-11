@@ -10,6 +10,13 @@ set shiftwidth=4 "自动缩进时，使用4个空格，默认是8个
 set sm "括号配对情况
 syntax on   
 set cursorline 
+    """"""""""""""""""""""""""
+    "
+    let mapleader = "," "设置NERD_commenter.vim
+    "Fast reloading of the .vimrc
+    map <silent> <leader>ss :source ~/.vimrc<cr>
+    map <silent> <leader>ee :e ~/.vimrc<cr>
+
 "开始使用vundle的必须配置
 set nocompatible    " 是vim不兼容vi
 filetype off        " required!
@@ -20,12 +27,15 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " vim-scripts repos
 Bundle 'a.vim'
-Bundle 'ctags.vim'
 Bundle 'taglist.vim'
 Bundle 'winmanager'
+Bundle 'ctags.vim'
 Bundle 'cscope.vim'
+Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'OmniCppComplete'
+"original repos on github
+
 filetype plugin indent on "vundle配置必须开启插件
 
 let g:winManagerWindowLayout='FileExplorer|TagList'
@@ -60,10 +70,13 @@ set backspace=indent,eol,start
 set pastetoggle=<F12>
 """""""""""""""""""""""""""""""""""""
 set completeopt=menu
-""""""""""""""""""""""""""""""""""""'
-let Tlist_Use_Right_Window=1
-let Tlist_Show_One_File=0 "让taglist可以同时展示多个文件的函数列表，如果想只有1个，设置为1
-let Tlist_File_Fold_Auto_Close=1 "非当前文件，函数列表折叠隐藏
-let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动推出vim
-let Tlist_Process_File_Always=0 "是否一直处理tags.1:处理;0:不处理。不是一直实时更新tags，因为没有必要
-let Tlist_Inc_Winwidth=0
+    """""""""""""""""""""""""""""""""'
+    "Tlist setting
+    let Tlist_Use_Right_Window=1
+    let Tlist_Show_One_File=1 "让taglist可以同时展示多个文件的函数列表，如果想只有1个，设置为1
+    let Tlist_File_Fold_Auto_Close=1 "非当前文件，函数列表折叠隐藏
+    let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动推出vim
+   """"""""""""""""""""""""""""""
+   " NERDTree setting
+   """"""""""""""""""""""""""""""
+   nmap <silent> <leader>tt :NERDTreeToggle<cr>
