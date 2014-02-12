@@ -16,7 +16,15 @@ set cursorline
     "Fast reloading of the .vimrc
     map <silent> <leader>ss :source ~/.vimrc<cr>
     map <silent> <leader>ee :e ~/.vimrc<cr>
+    """"""""""""""""""""""""""
+    "NERD_tree setting
+    let NERDTreeWinPos="right" 
+    let NERDTreeHighlightCursorline=1 "高亮当前行" 
+    let NERDTreeShowBookmarks=1   "自动显示标签"
+    let NERDTreeWinSize=30
+    nmap <silent> <leader>nt :NERDTreeToggle<CR>
 
+    
 "开始使用vundle的必须配置
 set nocompatible    " 是vim不兼容vi
 filetype off        " required!
