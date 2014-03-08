@@ -10,13 +10,14 @@ set cindent              "使用c语言的规则自动缩进，当敲回车时�
 set shiftwidth=4         "自动缩进时，使用4个空格，默认是8个
 set sm                   "括号配对情况
 syntax on   
-set cursorline 
+set cursorline           "高亮的线 
 set background=dark      "设置背景颜色
 set backspace=indent,eol,start
 set pastetoggle=<F12>
+set foldmethod=syntax  "语法项目指定折叠方式
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set mouse=n            " 在所有模式下都允许使用鼠标，还可以是n,v,i,c等
-"set whichwrap+=<,>,h,l " 退格键和方向键可以换行
+set mouse=n            " 在所有模式下都允许使用鼠标，还可以是n,v,i,c等
+set whichwrap+=<,>,h,l " 退格键和方向键可以换行
 set lz                  " 当运行宏时，在命令执行完成之前，不重绘屏幕
 set ai                  " 自动缩进
 set si                  " 智能缩进
@@ -29,7 +30,7 @@ set shiftwidth=4
 set tabstop=4
 " 状态栏
 set laststatus=2        " 总是显示状态栏
-"highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
+highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 "开始使用vundle的必须配置
 set nocompatible         " 是vim不兼容vi
@@ -101,7 +102,7 @@ vnoremap <silent> * :call VisualSearch('f')<CR>
 vnoremap <silent> # :call VisualSearch('b')<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Fast reloading of the .vimrc
-map <silent> <leader>ss :source ~/.vimrc<cr>
+map <silent> <leader>so :source ~/.vimrc<cr>
 map <silent> <leader>ee :e ~/.vimrc<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERD_tree setting
@@ -109,18 +110,20 @@ let NERDTreeShowHidden = 1         "" 隐藏
 let NERDTreeWinPos="right" 
 let NERDTreeHighlightCursorline=1  ""高亮当前行" 
 let NERDTreeShowBookmarks=1        ""自动显示标签"
-let NERDTreeWinSize=25
+let NERDTreeWinSize=30
 nmap <silent> <leader>n :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "quickfix setting
-nmap <F4> :cn<cr>
+nmap <F3> :cw<cr>
 nmap <F5> :cp<cr>
+nmap <F4> :cn<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "miniBufferExplore setting
-let g:miniBufExplMapCTabSwitchBufs = 1
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplorerMoreThanOne=0
+let g:miniBufExplMapCTabSwitchBufs = 1      ""启用以下两个功能：Ctrl+tab移到下一个buffer并在当前窗口打开；Ctrl+Shift+tab移到上一个buffer并在                                               当前窗口打开；ubuntu好像不支持
+let g:miniBufExplMapWindowNavVim = 1        ""按下Ctrl+h/j/k/l，可以切换到当前窗口的上下左右窗口
+let g:miniBufExplMapWindowNavArrows = 1     ""按下Ctrl+箭头，可以切换到当前窗口的上下左右窗口
+let g:miniBufExplorerMoreThanOne=0          ""
+let g:miniBufExplModSelTarget = 1           "" 不要在不可编辑内容的窗口（如TagList窗口）中打开选中的buffer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
  " OmniCppComplete.vim setting
  " http://www.vim.org/scripts/script.php?script_id=1520
@@ -252,4 +255,15 @@ function SetCompilation()
         set makeprg=g++ \ %\ -o\ %<根据不同
     endif
 endfunction 
+"从系统剪切板中复制，剪切，粘贴
+map <F8> "+y
+map <F9> "+p
 
+" 快捷输入
+" 自动完成括号和引号
+inoremap <leader>1 ()<esc>:let leavechar=")"<cr>i
+inoremap <leader>2 []<esc>:let leavechar="]"<cr>i
+inoremap <leader>3 {}<esc>:let leavechar="}"<cr>i
+inoremap <leader>4 {<esc>o}<esc>:let leavechar="}"<cr>O
+inoremap <leader>q ''<esc>:let leavechar="'"<cr>i
+inoremap <leader>w ""<esc>:let leavechar='"'<cr>i
