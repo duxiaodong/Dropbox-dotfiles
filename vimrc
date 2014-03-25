@@ -1,40 +1,44 @@
 let mapleader = "," 
 colorscheme desert 
 set nu 
-set showcmd              "在状态栏显示正在输入的命令
-syntax enable            "语法高亮
-set expandtab            "将tal键改为空格，默认8个
-set tabstop=4            "将Tab键改为4个空格
-set smarttab             "智能删除tab
-set cindent              "使用c语言的规则自动缩进，当敲回车时候自动缩进
-set shiftwidth=4         "自动缩进时，使用4个空格，默认是8个
-set sm                   "括号配对情况
+set showcmd                                      "在状态栏显示正在输入的命令
+syntax enable                                    "语法高亮
+set expandtab                                    "将tal键改为空格，默认8个
+set tabstop=4                                    "将Tab键改为4个空格
+set smarttab                                     "智能删除tab
+set cindent                                      "使用c语言的规则自动缩进，当敲回车时候自动缩进
+set shiftwidth=4                                 "自动缩进时，使用4个空格，默认是8个
+set sm                                           "括号配对情况
 syntax on   
-set cursorline           "高亮的线 
-set background=dark      "设置背景颜色
+set cursorline                                   "高亮的线 
+set background=dark                              "设置背景颜色
 set backspace=indent,eol,start
-set pastetoggle=<F12>
-set foldmethod=syntax  "语法项目指定折叠方式
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set mouse=n            " 在所有模式下都允许使用鼠标，还可以是n,v,i,c等
-set whichwrap+=<,>,h,l " 退格键和方向键可以换行
-set lz                  " 当运行宏时，在命令执行完成之前，不重绘屏幕
-set ai                  " 自动缩进
-set si                  " 智能缩进
-set showmatch           " 显示匹配的括号 
-set cindent             " C/C++风格缩进
+set pastetoggle=<f12>                            "设置粘贴模式
+set foldmethod=syntax                            "语法项目指定折叠方式
+set mouse=n                                      "在所有模式下都允许使用鼠标，还可以是n,v,i,c等
+set whichwrap+=<,>,h,l                           "退格键和方向键可以换行
+set lz                                           "当运行宏时，在命令执行完成之前，不重绘屏幕
+set ai                                           "自动缩进
+set si                                           "智能缩进
+set showmatch                                    "显示匹配的括号 
+set showcmd                                      "显示命令
+set cindent                                      "C/C++风格缩进
+set hlsearch                                     "高亮搜索
+set magic                                        "help magic
+set autoread                                     "当文件被修改，自动重新读取
+set history=400                                  "VIM记忆命令操作数
 " tab转化为4个字符
 set expandtab
 set smarttab
 set shiftwidth=4
 set tabstop=4
 " 状态栏
-set laststatus=2        " 总是显示状态栏
-highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
+set laststatus=1                                 "NO显示状态栏
+"highlight StatusLine cterm=bold ctermfg=yellow ctermbg=blue
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 "开始使用vundle的必须配置
-set nocompatible         " 是vim不兼容vi
-filetype off             " required!
+set nocompatible                                 " 是vim不兼容vi
+filetype off                                     " required!
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " let Vundle manage Vundle
@@ -49,12 +53,14 @@ Bundle 'cscope.vim'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'OmniCppComplete'
-Bundle 'minibufexpl.vim'
-Bundle 'bufexplorer.zip'
+"Bundle 'minibufexpl.vim'
+"Bundle 'bufexplorer.zip'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "original repos on github
-
+Bundle 'kien/ctrlp.vim'
+Bundle 'szw/vim-ctrlspace'
 filetype plugin indent on 
-"""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "winmanger 协同管理NERDTree,Taglist
 let g:NERDTree_title="[NERD Tree]" 
 let g:winManagerWindowLayout='NERDTree|TagList,BufExplorer'
@@ -63,26 +69,26 @@ function! NERDTree_Start()
 
     exec 'NERDTree'
 
-    endfunction
+endfunction
 
-    function! NERDTree_IsValid()
+function! NERDTree_IsValid()
 
     return 1
 
-    endfunction
+endfunction
 
-    nmap wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
+nmap wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
 
-    nmap <F3> :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
+nmap <F3> :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""'
+"""""""""""""""""""""""""""""""""""""""""""""""""'""""""
 "Taglist setting
-let Tlist_Use_Right_Window=1        "" 右边显示
-let Tlist_Exit_OnlyWindow =1        "" 只有一个窗口退出
-let Tlist_Show_One_File=1           "" 让taglist可以同时展示多个文件的函数列表，如果想只有1个，设置为1
-let Tlist_File_Fold_Auto_Close=1    "" 非当前文件，函数列表折叠隐藏
-let Tlist_Exit_OnlyWindow=1         "" 当taglist是最后一个分割窗口时，自退出vim
-""""""""""""""""""""""""""""""""""""""""""""""""""
+let Tlist_Use_Right_Window=0                            "左边显示
+let Tlist_Exit_OnlyWindow =1                            " 只有一个窗口退出
+let Tlist_Show_One_File=1                               " 让taglist可以同时展示多个文件的函数列表，如果想只有1个，设置为1
+let Tlist_File_Fold_Auto_Close=1                        " 非当前文件，函数列表折叠隐藏
+let Tlist_Exit_OnlyWindow=1                             " 当taglist是最后一个分割窗口时，自退出vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 根据给定方向搜索当前光标下的单词，结合下面两个绑定使用
 function! VisualSearch(direction) range
     let l:saved_reg = @"
@@ -104,52 +110,60 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 "Fast reloading of the .vimrc
 map <silent> <leader>so :source ~/.vimrc<cr>
 map <silent> <leader>ee :e ~/.vimrc<cr>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "NERD_tree setting
-let NERDTreeShowHidden = 1         "" 隐藏
+let NERDTreeShowHidden = 1                             "隐藏
 let NERDTreeWinPos="right" 
-let NERDTreeHighlightCursorline=1  ""高亮当前行" 
-let NERDTreeShowBookmarks=1        ""自动显示标签"
+let NERDTreeHighlightCursorline=1                      "高亮当前行" 
+let NERDTreeShowBookmarks=1                            "自动显示标签"
 let NERDTreeWinSize=30
-nmap <silent> <leader>n :NERDTreeToggle<CR>
+"nmap <silent> <leader>n :NERDTreeToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "quickfix setting
-nmap <F3> :cw<cr>
-nmap <F5> :cp<cr>
-nmap <F4> :cn<cr>
+"nmap <F3> :cw<cr>                                      "向上
+"nmap <F5> :cp<cr>
+"nmap <F4> :cn<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 "miniBufferExplore setting
-let g:miniBufExplMapCTabSwitchBufs = 1      ""启用以下两个功能：Ctrl+tab移到下一个buffer并在当前窗口打开；Ctrl+Shift+tab移到上一个buffer并在                                               当前窗口打开；ubuntu好像不支持
-let g:miniBufExplMapWindowNavVim = 1        ""按下Ctrl+h/j/k/l，可以切换到当前窗口的上下左右窗口
-let g:miniBufExplMapWindowNavArrows = 1     ""按下Ctrl+箭头，可以切换到当前窗口的上下左右窗口
-let g:miniBufExplorerMoreThanOne=0          ""
-let g:miniBufExplModSelTarget = 1           "" 不要在不可编辑内容的窗口（如TagList窗口）中打开选中的buffer
+let g:miniBufExplMapWindowNavVim = 1                    "按下Ctrl+h/j/k/l，可以切换到当前窗口的上下左右窗口
+let g:miniBufExplorerMoreThanOne=0                      
+let g:miniBufExplModSelTarget = 1                       " 不要在不可编辑内容的窗口（如TagList窗口）中打开选中的buffer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
- " OmniCppComplete.vim setting
- " http://www.vim.org/scripts/script.php?script_id=1520
-"map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>  
- set completeopt=menu
- let OmniCpp_ShowPrototypeInAbbr = 1
- let OmniCpp_DefaultNamespaces = ["std"]     " 逗号分割的字符串
- let OmniCpp_MayCompleteScope = 1
- let OmniCpp_ShowPrototypeInAbbr = 0
- let OmniCpp_SelectFirstItem = 2
- " c-j自动补全，当补全菜单打开时，c-j,k上下选择
- imap <expr> <c-j>      pumvisible()?"\<C-N>":"\<C-X><C-O>"
- imap <expr> <c-k>      pumvisible()?"\<C-P>":"\<esc>"
- " f:文件名补全，l:行补全，d:字典补全，]:tag补全
- imap <C-]>             <C-X><C-]>
- imap <C-F>             <C-X><C-F>
- imap <C-D>             <C-X><C-D>
- imap <C-L>             <C-X><C-L> 
+" OmniCppComplete.vim setting
+set completeopt=menu
+let OmniCpp_ShowPrototypeInAbbr = 1
+let OmniCpp_DefaultNamespaces = ["std"]                 " 逗号分割的字符串
+let OmniCpp_MayCompleteScope = 1
+let OmniCpp_ShowPrototypeInAbbr = 0
+let OmniCpp_SelectFirstItem = 2
+" c-j自动补全，当补全菜单打开时，c-j,k上下选择
+imap <expr> <c-j>      pumvisible()?"\<C-N>":"\<C-X><C-O>"
+imap <expr> <c-k>      pumvisible()?"\<C-P>":"\<esc>"
+" f:文件名补全，l:行补全，d:字典补全，]:tag补全
+imap <C-]> <C-X><C-]>
+imap <C-F> <C-X><C-F>
+imap <C-D> <C-X><C-D>
+imap <C-L> <C-X><C-L> 
 """""""""""""""""""""""""""""""""""""""""""""""""""
-    " 更新ctags和cscope索引
-    " href: http://www.vimer.cn/2009/10/把vim打造成一个真正的ide2.html
-    " 稍作修改，提取出DeleteFile函数，修改ctags和cscope执行命令
+"常用的映射
+nmap <C-h> <C-w>h 
+nmap <C-j> <C-w>j 
+nmap <C-k> <C-w>k 
+nmap <C-l> <C-w>l 
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" Toggle单行注释/“性感”注释/注释到行尾/取消注释
+"map <leader>cc ,c<space>
+"map <leader>cs ,cs
+"map <leader>c$ ,c$
+"map <leader>cu ,cu
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" 更新ctags和cscope索引
+" href: http://www.vimer.cn/2009/10/把vim打造成一个真正的ide2.html
+" 稍作修改，提取出DeleteFile函数，修改ctags和cscope执行命令
 map <F6> :call Do_CsTag()<cr>
 function! Do_CsTag()
     let dir = getcwd()
- 
+
     "先删除已有的tags和cscope文件，如果存在且无法删除，则报错。
     if ( DeleteFile(dir, "tags") )
         return
@@ -160,7 +174,7 @@ function! Do_CsTag()
     if ( DeleteFile(dir, "cscope.out") )
         return
     endif
- 
+
     if(executable('ctags'))
         silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
     endif
@@ -179,7 +193,7 @@ function! Do_CsTag()
     " 刷新屏幕
     execute "redr!"
 endfunction
- 
+
 function! DeleteFile(dir, filename)
     if filereadable(a:filename)
         if (g:isWin)
@@ -196,7 +210,7 @@ function! DeleteFile(dir, filename)
     endif
     return 0
 endfunction
- 
+
 " cscope 绑定
 if has("cscope")
     set csto=1
@@ -210,8 +224,8 @@ if has("cscope")
     " t: 文本       e: egrep模式    f: 文件     i: include本文件的文件
     nmap <leader>ss :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
     nmap <leader>sg :cs find g <C-R>=expand("<cword>")<CR><CR>
-    nmap <leader>sc :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
-    nmap <leader>st :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    nmap <leader>sc :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <leader>st :cs find t <C-R>=expand("<cword>")<CR><CR>
     nmap <leader>se :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
     nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
     nmap <leader>si :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
@@ -223,47 +237,52 @@ function! CurDir()
     let curdir = substitute(getcwd(), $HOME, "~", "g")
     return curdir
 endfunction
-set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd:\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|\ %{$USER}\ @\ %{hostname()}\ 
+"set statusline=[%n]\ %f%m%r%h\ \|\ \ pwd:\ %{CurDir()}\ \ \|%=\|\ %l,%c\ %p%%\ \|\ ascii=%b,hex=%b%{((&fenc==\"\")?\"\":\"\ \|\ \".&fenc)}\ \|\ %{$USER}\ @\ %{hostname()}\ 
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Buffers Explorer （需要genutils.vim）
-" http://vim.sourceforge.net/scripts/script.php?script_id=42
-" http://www.vim.org/scripts/script.php?script_id=197
-let g:bufExplorerDefaultHelp=0       " Do not show default help.
-let g:bufExplorerShowRelativePath=1  " Show relative paths.
-let g:bufExplorerSortBy='mru'        " Sort by most recently used.
-let g:bufExplorerSplitRight=0        " Split left.
-let g:bufExplorerSplitVertical=1     " Split vertically.
-let g:bufExplorerUseCurrentWindow=1  " Open in new window.
-autocmd BufWinEnter \[Buf\ List\] setl nonumber
-nmap <silent> <Leader>b :BufExplorer<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "F7一键编译程序
 nmap <F7> :call DoOneFileMake()<CR>
 function DoOneFileMake()
-if(expand("%:p:h")!=getcwd())
-            echohl WarningMsg | echo "Fail to make! This file is not in the current dir! Press redirect to the dir of this file."
- endif
- exec "w"
- call SetCompilation()
- exec "make"
- exec "copen"
+    if(expand("%:p:h")!=getcwd())
+        echohl WarningMsg | echo "Fail to make! This file is not in the current dir! Press redirect to the dir of this file."
+    endif
+    exec "w"
+    call SetCompilation()
+    exec "make"
+    exec "copen"
 endfunction
 function SetCompilation()
     if &filetype=='c'
-    set makeprg=gcc\ %\ -o\ %<
+        set makeprg=gcc\ %\ -o\ %<
     elseif &filetype=='cpp'
         set makeprg=g++ \ %\ -o\ %<根据不同
     endif
 endfunction 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 快捷输入
+nmap <C-h> <C-w>h 
+nmap <C-j> <C-w>j 
+nmap <C-k> <C-w>k 
+nmap <C-l> <C-w>l 
+imap <leader>n <esc>
 "从系统剪切板中复制，剪切，粘贴
+map <silent> <leader>c :"+y
+map <silent> <leader>c :"+p
 map <F8> "+y
 map <F9> "+p
-
-" 快捷输入
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 自动完成括号和引号
-inoremap <leader>1 ()<esc>:let leavechar=")"<cr>i
-inoremap <leader>2 []<esc>:let leavechar="]"<cr>i
-inoremap <leader>3 {}<esc>:let leavechar="}"<cr>i
-inoremap <leader>4 {<esc>o}<esc>:let leavechar="}"<cr>O
-inoremap <leader>q ''<esc>:let leavechar="'"<cr>i
-inoremap <leader>w ""<esc>:let leavechar='"'<cr>i
+imap <leader>1 ()<esc>:let leavechar=")"<cr>i
+imap <leader>2 []<esc>:let leavechar="]"<cr>i
+imap <leader>3 {}<esc>:let leavechar="}"<cr>i
+imap <leader>4 {<esc>o}<esc>:let leavechar="}"<cr>O
+imap <leader>q ''<esc>:let leavechar="'"<cr>i
+imap <leader>w ""<esc>:let leavechar='"'<cr>i
+" 恢复上次文件打开位置
+"set viminfo='10,\"100,:20,%,n~/.viminfo
+"au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"config CtrlSpace
+hi CtrlSpaceSelected term=reverse ctermfg=187  ctermbg=23  cterm=bold
+hi CtrlSpaceNormal   term=NONE    ctermfg=244  ctermbg=232 cterm=NONE
+hi CtrlSpaceFound    ctermfg=220  ctermbg=NONE cterm=bold
+
